@@ -23,8 +23,13 @@ clean:
 
 # ==== Targets ====
 
+.PRECIOUS: ${BINDIR}/generate.o
+${BINDIR}/generate.o: ${SOURCEDIR}/generate.cpp
+	mkdir -p $(@D)
+	$(COMP) -c $< -o $@ $(COMPFLAGS)
+
 .PRECIOUS: ${BINDIR}/%.o
-${BINDIR}/%.o: ${SOURCEDIR}/%.cpp
+${BINDIR}/%.o: ${SOURCEDIR}/%.cpp ${SOURCEDIR}/%.h
 	mkdir -p $(@D)
 	$(COMP) -c $< -o $@ $(COMPFLAGS)
 
