@@ -4,10 +4,10 @@
 # ==== Definitions ====
 
 COMP = c++
-BINDIR = bin
+TMPDIR = tmp
 SOURCEDIR = source
 RELDIR = rel
-OBJS = ${BINDIR}/dot.o ${BINDIR}/graph.o ${BINDIR}/random.o ${BINDIR}/generate.o
+OBJS = ${TMPDIR}/dot.o ${TMPDIR}/graph.o ${TMPDIR}/random.o ${TMPDIR}/generate.o
 COMPFLAGS =
 LINKFLAGS =
 
@@ -19,17 +19,17 @@ default: ${RELDIR}/generate
 
 .PHONY: clean
 clean:
-	rm -rf $(BINDIR) $(RELDIR)
+	rm -rf $(TMPDIR) $(RELDIR)
 
 # ==== Targets ====
 
-.PRECIOUS: ${BINDIR}/generate.o
-${BINDIR}/generate.o: ${SOURCEDIR}/generate.cpp
+.PRECIOUS: ${TMPDIR}/generate.o
+${TMPDIR}/generate.o: ${SOURCEDIR}/generate.cpp
 	mkdir -p $(@D)
 	$(COMP) -c $< -o $@ $(COMPFLAGS)
 
-.PRECIOUS: ${BINDIR}/%.o
-${BINDIR}/%.o: ${SOURCEDIR}/%.cpp ${SOURCEDIR}/%.h
+.PRECIOUS: ${TMPDIR}/%.o
+${TMPDIR}/%.o: ${SOURCEDIR}/%.cpp ${SOURCEDIR}/%.h
 	mkdir -p $(@D)
 	$(COMP) -c $< -o $@ $(COMPFLAGS)
 
